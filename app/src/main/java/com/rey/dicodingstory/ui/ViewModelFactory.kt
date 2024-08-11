@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.rey.dicodingstory.data.StoryRepository
 import com.rey.dicodingstory.di.Injection
+import com.rey.dicodingstory.ui.login.LoginViewModel
 import com.rey.dicodingstory.ui.main.MainViewModel
 
 class ViewModelFactory private constructor(private val repository: StoryRepository): ViewModelProvider.NewInstanceFactory() {
@@ -13,6 +14,9 @@ class ViewModelFactory private constructor(private val repository: StoryReposito
         return when {
             modelClass.isAssignableFrom(MainViewModel::class.java) -> {
                 MainViewModel(repository) as T
+            }
+            modelClass.isAssignableFrom(LoginViewModel::class.java) -> {
+                LoginViewModel(repository) as T
             }
             else -> throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)
         }
