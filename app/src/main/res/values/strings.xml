@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">DicodingStory</string>
+    <string name="welcome_to_story_app">Welcome To Story App</string>
+    <string name="login">Login</string>
+    <string name="password">Password</string>
+    <string name="email">Email</string>
 </resources>
