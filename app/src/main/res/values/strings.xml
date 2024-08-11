@@ -4,4 +4,7 @@
     <string name="login">Login</string>
     <string name="password">Password</string>
     <string name="email">Email</string>
+    <string name="home">Home</string>
+    <string name="upload">Upload</string>
+    <string name="map">Map</string>
 </resources>
