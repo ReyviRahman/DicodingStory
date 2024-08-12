@@ -7,6 +7,10 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.navigation.findNavController
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.setupActionBarWithNavController
+import androidx.navigation.ui.setupWithNavController
 import com.rey.dicodingstory.R
 import com.rey.dicodingstory.databinding.ActivityMainBinding
 import com.rey.dicodingstory.ui.ViewModelFactory
@@ -29,7 +33,16 @@ class MainActivity : AppCompatActivity() {
                 startActivity(Intent(this, LoginActivity::class.java))
                 finish()
             } else {
+                val navController = findNavController(R.id.nav_host_fragment_activity_main)
 
+                val appBarConfiguration = AppBarConfiguration(
+                    setOf(
+                        R.id.navigation_home, R.id.navigation_upload, R.id.navigation_map
+                    )
+                )
+
+                setupActionBarWithNavController(navController, appBarConfiguration)
+                binding.bottomNav.setupWithNavController(navController)
             }
         }
 
