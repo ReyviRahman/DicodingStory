@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="">
+
+    <fragment
+        android:id="@+id/navigation_home"
+        android:name="com.rey.dicodingstory.ui.home.HomeFragment"
+        android:label="@string/home"
+        tools:layout="@layout/fragment_home"/>
+
+    <fragment
+        android:id="@+id/navigation_upload"
+        android:name="com.rey.dicodingstory.ui.upload.UploadFragment"
+        android:label="@string/upload"
+        tools:layout="@layout/fragment_upload"/>
+
+    <fragment
+        android:id="@+id/navigation_map"
+        android:name="com.rey.dicodingstory.ui.map.MapFragment"
+        android:label="@string/map"
+        tools:layout="@layout/fragment_map"/>
+
+
+</navigation>
