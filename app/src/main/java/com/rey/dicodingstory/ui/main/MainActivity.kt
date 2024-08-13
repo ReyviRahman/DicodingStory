@@ -33,16 +33,16 @@ class MainActivity : AppCompatActivity() {
                 startActivity(Intent(this, LoginActivity::class.java))
                 finish()
             } else {
+
+//                val appBarConfiguration = AppBarConfiguration(
+//                    setOf(
+//                        R.id.navigation_home, R.id.navigation_upload, R.id.navigation_map
+//                    )
+//                )
                 val navController = findNavController(R.id.nav_host_fragment_activity_main)
-
-                val appBarConfiguration = AppBarConfiguration(
-                    setOf(
-                        R.id.navigation_home, R.id.navigation_upload, R.id.navigation_map
-                    )
-                )
-
-                setupActionBarWithNavController(navController, appBarConfiguration)
+//                setupActionBarWithNavController(navController, appBarConfiguration)
                 binding.bottomNav.setupWithNavController(navController)
+
             }
         }
 
