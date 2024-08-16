@@ -7,6 +7,7 @@ import com.rey.dicodingstory.data.pref.UserModel
 import com.rey.dicodingstory.data.pref.UserPreference
 import com.rey.dicodingstory.data.remote.retrofit.ApiService
 import com.rey.dicodingstory.data.remote.retrofit.response.ErrorResponse
+import com.rey.dicodingstory.data.remote.retrofit.response.GetAllStoryResponse
 import com.rey.dicodingstory.data.remote.retrofit.response.LoginResponse
 import kotlinx.coroutines.flow.Flow
 import retrofit2.HttpException
@@ -27,6 +28,19 @@ class StoryRepository private constructor(
         emit(Result.Loading)
         try {
             val response = apiService.login(email, password)
+            emit(Result.Success(response))
+        } catch (e: HttpException){
+            val jsonInString = e.response()?.errorBody()?.string()
+            val errorBody = Gson().fromJson(jsonInString, ErrorResponse::class.java)
+            val errorMessage = errorBody.message
+            emit(Result.Error(errorMessage.toString()))
+        }
+    }
+
+    fun getAllStories(token: String): LiveData<Result<GetAllStoryResponse>> = liveData {
+        emit(Result.Loading)
+        try {
+            val response = apiService.getStories("Bearer $token")
             emit(Result.Success(response))
         } catch (e: HttpException){
             val jsonInString = e.response()?.errorBody()?.string()
