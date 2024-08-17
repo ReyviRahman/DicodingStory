@@ -1,5 +1,6 @@
 package com.rey.dicodingstory.ui.home
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Toast
@@ -10,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.rey.dicodingstory.data.remote.retrofit.response.ListStoryItem
 import com.rey.dicodingstory.databinding.ItemStoryBinding
+import com.rey.dicodingstory.ui.detail.DetailActivity
 
 class HomeAdapter: PagingDataAdapter<ListStoryItem, HomeAdapter.MyViewHolder>(DIFF_CALLBACK) {
     class MyViewHolder(val binding: ItemStoryBinding): RecyclerView.ViewHolder(binding.root) {
@@ -20,7 +22,9 @@ class HomeAdapter: PagingDataAdapter<ListStoryItem, HomeAdapter.MyViewHolder>(DI
             binding.tvTitle.text = storyItem.name
             binding.tvDescription.text = storyItem.description
             itemView.setOnClickListener{
-                Toast.makeText(binding.root.context, "YAwwww", Toast.LENGTH_SHORT).show()
+                val intent = Intent(itemView.context, DetailActivity::class.java)
+                intent.putExtra(DetailActivity.EXTRA_ID, storyItem.id)
+                itemView.context.startActivity(intent)
             }
         }
     }

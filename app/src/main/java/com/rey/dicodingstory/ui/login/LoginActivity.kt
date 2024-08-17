@@ -3,6 +3,7 @@ package com.rey.dicodingstory.ui.login
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -46,6 +47,7 @@ class LoginActivity : AppCompatActivity() {
                         }
                         is Result.Error -> {
                             binding.progressBar.visibility = View.GONE
+                            Toast.makeText(this, result.error, Toast.LENGTH_SHORT).show()
                         }
 
                     }

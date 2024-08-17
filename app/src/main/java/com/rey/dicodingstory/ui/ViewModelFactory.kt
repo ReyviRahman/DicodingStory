@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.rey.dicodingstory.data.StoryRepository
 import com.rey.dicodingstory.di.Injection
+import com.rey.dicodingstory.ui.detail.DetailViewModel
 import com.rey.dicodingstory.ui.home.HomeFragmentViewModel
 import com.rey.dicodingstory.ui.login.LoginViewModel
 import com.rey.dicodingstory.ui.main.MainViewModel
@@ -21,6 +22,9 @@ class ViewModelFactory private constructor(private val repository: StoryReposito
             }
             modelClass.isAssignableFrom(HomeFragmentViewModel::class.java) -> {
                 HomeFragmentViewModel(repository) as T
+            }
+            modelClass.isAssignableFrom(DetailViewModel::class.java) -> {
+                DetailViewModel(repository) as T
             }
             else -> throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)
         }
