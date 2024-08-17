@@ -10,6 +10,7 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.rey.dicodingstory.R
+import com.rey.dicodingstory.data.LoadingStateAdapter
 import com.rey.dicodingstory.data.Result
 import com.rey.dicodingstory.data.StoryPagingSource
 import com.rey.dicodingstory.databinding.FragmentHomeBinding
@@ -38,7 +39,11 @@ class HomeFragment : Fragment() {
         val homeAdapter = HomeAdapter()
         binding.rvItemStory.layoutManager = LinearLayoutManager(requireContext())
         binding.rvItemStory.setHasFixedSize(true)
-        binding.rvItemStory.adapter = homeAdapter
+        binding.rvItemStory.adapter = homeAdapter.withLoadStateFooter(
+            footer = LoadingStateAdapter {
+                homeAdapter.retry()
+            }
+        )
 
         viewModel.getSession().observe(viewLifecycleOwner) { user ->
             if (user.isLogin) {
