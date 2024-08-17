@@ -3,6 +3,7 @@ package com.rey.dicodingstory.ui.home
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -10,7 +11,7 @@ import com.bumptech.glide.Glide
 import com.rey.dicodingstory.data.remote.retrofit.response.ListStoryItem
 import com.rey.dicodingstory.databinding.ItemStoryBinding
 
-class HomeAdapter(): ListAdapter<ListStoryItem, HomeAdapter.MyViewHolder>(DIFF_CALLBACK) {
+class HomeAdapter: PagingDataAdapter<ListStoryItem, HomeAdapter.MyViewHolder>(DIFF_CALLBACK) {
     class MyViewHolder(val binding: ItemStoryBinding): RecyclerView.ViewHolder(binding.root) {
         fun bind(storyItem: ListStoryItem) {
             Glide.with(binding.root.context)
@@ -30,7 +31,9 @@ class HomeAdapter(): ListAdapter<ListStoryItem, HomeAdapter.MyViewHolder>(DIFF_C
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val story = getItem(position)
-        holder.bind(story)
+        if (story != null) {
+            holder.bind(story)
+        }
     }
 
     companion object {

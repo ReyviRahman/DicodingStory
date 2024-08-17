@@ -8,8 +8,10 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.rey.dicodingstory.R
 import com.rey.dicodingstory.data.Result
+import com.rey.dicodingstory.data.StoryPagingSource
 import com.rey.dicodingstory.databinding.FragmentHomeBinding
 import com.rey.dicodingstory.ui.ViewModelFactory
 
@@ -39,22 +41,38 @@ class HomeFragment : Fragment() {
         binding.rvItemStory.adapter = homeAdapter
 
         viewModel.getSession().observe(viewLifecycleOwner) { user ->
-            viewModel.getAllStories(user.token).observe(viewLifecycleOwner) { result ->
-                if (result != null) {
-                    when(result) {
-                        Result.Loading -> {
-                            binding.progressBar.visibility = View.VISIBLE
-                        }
-                        is Result.Success -> {
-                            binding.progressBar.visibility = View.GONE
-                            homeAdapter.submitList(result.data.listStory)
-                        }
-                        is Result.Error -> {
-                            binding.progressBar.visibility = View.GONE
-                            Toast.makeText(requireActivity(), "Terjadi kesalahan ${result.error}", Toast.LENGTH_SHORT).show()
-                        }
-                    }
+            if (user.isLogin) {
+                viewModel.getAllStories(user.token).observe(viewLifecycleOwner) {
+                    homeAdapter.submitData(lifecycle, it)
                 }
+            }
+        }
+
+        StoryPagingSource.isLoading.observe(viewLifecycleOwner) {
+            if (it == true) {
+                binding.progressBar.visibility = View.VISIBLE
+            } else {
+                binding.progressBar.visibility = View.GONE
+            }
+        }
+
+        binding.toolbar.setOnMenuItemClickListener { menuItem ->
+            when (menuItem.itemId) {
+                R.id.logout -> {
+                    MaterialAlertDialogBuilder(requireActivity())
+                        .setTitle(resources.getString(R.string.logout))
+                        .setMessage(resources.getString(R.string.logout_meesage))
+                        .setNegativeButton(resources.getString(R.string.no)) { dialog, which ->
+
+                        }
+                        .setPositiveButton(resources.getString(R.string.yes)) { dialog, which ->
+                            viewModel.logout()
+                        }
+                        .show()
+                    true
+                }
+
+                else -> false
             }
         }
     }
