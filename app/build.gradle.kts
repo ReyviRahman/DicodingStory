@@ -59,4 +59,5 @@ dependencies {
     implementation(libs.androidx.navigation.ui.ktx)
     implementation(libs.glide)
     implementation(libs.androidx.paging.runtime.ktx)
+    implementation(libs.androidx.exifinterface)
 }

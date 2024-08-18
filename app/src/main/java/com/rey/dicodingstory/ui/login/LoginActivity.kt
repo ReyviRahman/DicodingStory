@@ -40,7 +40,7 @@ class LoginActivity : AppCompatActivity() {
                             binding.progressBar.visibility = View.VISIBLE
                         }
                         is Result.Success -> {
-                            viewModel.saveSession(UserModel(email, result.data.loginResult?.token.toString()))
+                            viewModel.saveSession(UserModel(email, result.data.loginResult?.token.toString(), result.data.loginResult?.name.toString()))
                             startActivity(Intent(this, MainActivity::class.java))
                             finish()
                             binding.progressBar.visibility = View.GONE

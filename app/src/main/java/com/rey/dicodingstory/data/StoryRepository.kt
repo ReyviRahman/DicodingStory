@@ -16,7 +16,10 @@ import com.rey.dicodingstory.data.remote.retrofit.response.GetAllStoryResponse
 import com.rey.dicodingstory.data.remote.retrofit.response.ListStoryItem
 import com.rey.dicodingstory.data.remote.retrofit.response.LoginResponse
 import com.rey.dicodingstory.data.remote.retrofit.response.Story
+import com.rey.dicodingstory.data.remote.retrofit.response.UploadStoriesResponse
 import kotlinx.coroutines.flow.Flow
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import retrofit2.HttpException
 
 class StoryRepository private constructor(
@@ -52,6 +55,19 @@ class StoryRepository private constructor(
         emit(Result.Loading)
         try {
             val response = apiService.getDetailStories("Bearer $token", id)
+            emit(Result.Success(response))
+        } catch (e: HttpException) {
+            val jsonInString = e.response()?.errorBody()?.string()
+            val errorBody = Gson().fromJson(jsonInString, ErrorResponse::class.java)
+            val errorMessage = errorBody.message
+            emit(Result.Error(errorMessage.toString()))
+        }
+    }
+
+    fun uploadStories(token: String, file: MultipartBody.Part, description: RequestBody): LiveData<Result<UploadStoriesResponse>> = liveData {
+        emit(Result.Loading)
+        try {
+            val response = apiService.uploadStories("Bearer $token", file, description)
             emit(Result.Success(response))
         } catch (e: HttpException) {
             val jsonInString = e.response()?.errorBody()?.string()

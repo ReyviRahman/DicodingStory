@@ -9,6 +9,7 @@ import com.rey.dicodingstory.ui.detail.DetailViewModel
 import com.rey.dicodingstory.ui.home.HomeFragmentViewModel
 import com.rey.dicodingstory.ui.login.LoginViewModel
 import com.rey.dicodingstory.ui.main.MainViewModel
+import com.rey.dicodingstory.ui.upload.UploadViewModel
 
 class ViewModelFactory private constructor(private val repository: StoryRepository): ViewModelProvider.NewInstanceFactory() {
     @Suppress("UNCHECKED_CAST")
@@ -25,6 +26,9 @@ class ViewModelFactory private constructor(private val repository: StoryReposito
             }
             modelClass.isAssignableFrom(DetailViewModel::class.java) -> {
                 DetailViewModel(repository) as T
+            }
+            modelClass.isAssignableFrom(UploadViewModel::class.java) -> {
+                UploadViewModel(repository) as T
             }
             else -> throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)
         }
