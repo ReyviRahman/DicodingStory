@@ -5,148 +5,153 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.login.LoginActivity">
+    tools:context=".ui.register.RegisterActivity"
+    android:fillViewport="true">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/app_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:title="@string/app_name"
+                app:navigationIcon="@drawable/baseline_arrow_back_24"/>
+
+        </com.google.android.material.appbar.AppBarLayout>
+        
         <ImageView
             android:id="@+id/iv_logo"
             android:layout_width="250dp"
             android:layout_height="100dp"
             android:src="@drawable/ic_storyapp"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
-
-        <ImageView
-            android:id="@+id/iv_people"
-            android:layout_width="wrap_content"
-            android:scaleType="centerCrop"
-            android:layout_height="300dp"
-            android:src="@drawable/img_people"
-            app:layout_constraintTop_toBottomOf="@id/iv_logo"
+            app:layout_constraintTop_toBottomOf="@+id/app_bar"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>
 
         <TextView
-            android:id="@+id/tv_welcome"
+            android:id="@+id/tv_create_acc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/welcome_to_story_app"
-            android:textSize="25sp"
-            android:textStyle="bold"
-            android:textColor="@color/primary"
-            android:layout_marginTop="10dp"
-            app:layout_constraintTop_toBottomOf="@id/iv_people"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
-
-        <TextView
-            android:id="@+id/tv_login"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/login"
-            android:textStyle="bold"
+            android:text="@string/create_account"
             android:textSize="40sp"
+            android:layout_marginTop="10dp"
             android:textColor="@color/secondary"
+            android:textStyle="bold"
             android:layout_marginStart="16dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_welcome"/>
+            app:layout_constraintTop_toBottomOf="@+id/iv_logo"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/ti_nama"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            app:layout_constraintTop_toBottomOf="@+id/tv_create_acc"
+            app:layout_constraintStart_toStartOf="@+id/tv_create_acc"
+            app:layout_constraintEnd_toEndOf="parent">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_nama"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="@string/nama"
+                android:inputType="text"/>
+        </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/ti_email"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
             android:layout_marginTop="16dp"
-            app:layout_constraintTop_toBottomOf="@+id/tv_login"
-            app:layout_constraintStart_toStartOf="@+id/tv_login"
-            app:layout_constraintEnd_toEndOf="parent">
+            app:layout_constraintTop_toBottomOf="@+id/ti_nama"
+            app:layout_constraintStart_toStartOf="@+id/ti_nama"
+            app:layout_constraintEnd_toEndOf="@+id/ti_nama">
+
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/et_email"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:hint="@string/email"
                 android:inputType="textEmailAddress"/>
+
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/ti_pwd"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="16dp"
             app:layout_constraintTop_toBottomOf="@+id/ti_email"
-            app:layout_constraintStart_toStartOf="@+id/ti_email"
-            app:layout_constraintEnd_toEndOf="@+id/ti_email"
+            app:layout_constraintStart_toStartOf="@id/ti_email"
+            app:layout_constraintEnd_toEndOf="@id/ti_email"
             app:endIconMode="password_toggle">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/et_pwd"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:hint="@string/password"
                 android:inputType="textPassword"/>
+
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button
-            android:id="@+id/btn_login"
-            app:cornerRadius="8dp"
+            android:id="@+id/btn_create_account"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="@string/login"
-            android:textStyle="bold"
-            android:textAllCaps="true"
+            app:shapeAppearance="?attr/shapeAppearanceCornerSmall"
             android:backgroundTint="@color/secondary"
-            app:layout_constraintTop_toBottomOf="@id/ti_pwd"
+            android:textColor="@color/secondary_200"
+            android:text="@string/create_account"
+            android:layout_marginTop="16dp"
+            app:layout_constraintTop_toBottomOf="@+id/ti_pwd"
             app:layout_constraintStart_toStartOf="@id/ti_pwd"
-            app:layout_constraintEnd_toEndOf="@id/ti_pwd"
-            android:textColor="@color/secondary_200"/>
+            app:layout_constraintEnd_toEndOf="@id/ti_pwd"/>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@+id/btn_login"
+            app:layout_constraintTop_toBottomOf="@+id/btn_create_account"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:gravity="center"
             android:layout_marginTop="10dp">
 
             <TextView
-                android:id="@+id/tv_dont_have_acc"
+                android:id="@+id/tv_already_have_acc"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/dont_have_an_account"
+                android:text="@string/already_have_an_account"
                 android:textColor="@color/secondary"
                 android:textStyle="bold"/>
 
             <TextView
-                android:id="@+id/tv_register"
+                android:id="@+id/tv_login"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
-                android:text="@string/register"
+                android:text="@string/login"
                 android:textColor="@color/primary"
                 android:layout_marginStart="4dp"/>
 
         </LinearLayout>
-
         <ProgressBar
             android:id="@+id/progress_bar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:visibility="gone"
+            tools:visibility="visible"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:visibility="gone"
-            tools:visibility="visible"/>
+            app:layout_constraintEnd_toEndOf="parent"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-
-
 </ScrollView>

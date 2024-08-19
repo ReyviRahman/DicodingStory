@@ -16,6 +16,7 @@ import com.rey.dicodingstory.databinding.ActivityLoginBinding
 import com.rey.dicodingstory.databinding.ActivityMainBinding
 import com.rey.dicodingstory.ui.ViewModelFactory
 import com.rey.dicodingstory.ui.main.MainActivity
+import com.rey.dicodingstory.ui.register.RegisterActivity
 
 class LoginActivity : AppCompatActivity() {
     private var _binding: ActivityLoginBinding? = null
@@ -53,6 +54,11 @@ class LoginActivity : AppCompatActivity() {
                     }
                 }
             }
+        }
+
+        binding.tvRegister.setOnClickListener {
+            startActivity(Intent(this, RegisterActivity::class.java))
+            finish()
         }
     }
 

@@ -3,6 +3,7 @@ package com.rey.dicodingstory.data.remote.retrofit
 import com.rey.dicodingstory.data.remote.retrofit.response.DetailStoryResponse
 import com.rey.dicodingstory.data.remote.retrofit.response.GetAllStoryResponse
 import com.rey.dicodingstory.data.remote.retrofit.response.LoginResponse
+import com.rey.dicodingstory.data.remote.retrofit.response.RegisterResponse
 import com.rey.dicodingstory.data.remote.retrofit.response.UploadStoriesResponse
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -24,6 +25,14 @@ interface ApiService {
         @Field("password") password: String
     ): LoginResponse
 
+    @FormUrlEncoded
+    @POST("register")
+    suspend fun register(
+        @Field("name") name: String,
+        @Field("email") email: String,
+        @Field("password") password: String
+    ): RegisterResponse
+
     @GET("stories")
     suspend fun getStories(
         @Header("Authorization") token: String,
@@ -44,4 +53,6 @@ interface ApiService {
         @Part photo: MultipartBody.Part,
         @Part("description") description: RequestBody
     ): UploadStoriesResponse
+
+
 }

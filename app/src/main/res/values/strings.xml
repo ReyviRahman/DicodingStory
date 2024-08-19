@@ -17,4 +17,10 @@
     <string name="tuliskan_deskripsi_foto">Tuliskan Deskripsi Foto</string>
     <string name="upload_story">Upload Story</string>
     <string name="empty_image_warning">Gambar Tidak Terpilih</string>
+    <string name="create_account">Create Account</string>
+    <string name="nama">Nama</string>
+    <string name="already_have_an_account">Already have an account?</string>
+    <string name="dont_have_an_account">Don\'t have an account?</string>
+    <string name="sign_up_now"> Sign up now</string>
+    <string name="register">Register</string>
 </resources>

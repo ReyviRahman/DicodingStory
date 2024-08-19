@@ -15,6 +15,7 @@ import com.rey.dicodingstory.data.remote.retrofit.response.ErrorResponse
 import com.rey.dicodingstory.data.remote.retrofit.response.GetAllStoryResponse
 import com.rey.dicodingstory.data.remote.retrofit.response.ListStoryItem
 import com.rey.dicodingstory.data.remote.retrofit.response.LoginResponse
+import com.rey.dicodingstory.data.remote.retrofit.response.RegisterResponse
 import com.rey.dicodingstory.data.remote.retrofit.response.Story
 import com.rey.dicodingstory.data.remote.retrofit.response.UploadStoriesResponse
 import kotlinx.coroutines.flow.Flow
@@ -42,6 +43,19 @@ class StoryRepository private constructor(
         emit(Result.Loading)
         try {
             val response = apiService.login(email, password)
+            emit(Result.Success(response))
+        } catch (e: HttpException){
+            val jsonInString = e.response()?.errorBody()?.string()
+            val errorBody = Gson().fromJson(jsonInString, ErrorResponse::class.java)
+            val errorMessage = errorBody.message
+            emit(Result.Error(errorMessage.toString()))
+        }
+    }
+
+    fun postUserRegister(name: String, email: String, password: String): LiveData<Result<RegisterResponse>> = liveData {
+        emit(Result.Loading)
+        try {
+            val response = apiService.register(name, email, password)
             emit(Result.Success(response))
         } catch (e: HttpException){
             val jsonInString = e.response()?.errorBody()?.string()
